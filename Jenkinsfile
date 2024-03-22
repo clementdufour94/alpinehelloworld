@@ -31,7 +31,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        curl -u clement.dufourl@gmail.com:Vincennes4Ever http://172.17.0.1:8080
+                        curl -u email:mdp http://172.17.0.1:8080
                     '''
                 }
             }
