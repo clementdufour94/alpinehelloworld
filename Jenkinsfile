@@ -33,7 +33,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        curl -u clement.dufour-lamartinie@ynov.com:${DOCKERHUB_PASSWORD_PSW} http://172.17.0.1:${PORT_EXPOSED}
+                        curl -u clement.dufourl@gmail.com:${DOCKERHUB_PASSWORD_PSW} http://172.17.0.1:${PORT_EXPOSED}
                     '''
                 }
             }
