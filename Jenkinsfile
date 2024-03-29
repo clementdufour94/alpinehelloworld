@@ -1,3 +1,5 @@
+@Library('shared-library')_
+
 pipeline {
     environment {
         ID_DOCKER = "${ID_DOCKER_PARAMS}"
@@ -31,7 +33,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        curl -u email:mdp http://172.17.0.1:8080
+                        curl -u clement.dufour-lamartinie@ynov.com:${DOCKERHUB_PASSWORD_PSW} http://172.17.0.1:${PORT_EXPOSED}
                     '''
                 }
             }
@@ -53,7 +55,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        echo $DOCKERHUB_PASSWORD_PSW | docker login -u $ID_DOCKER --password-stdin
+                        echo $DOCKERHUB_PASSWORD | docker login -u $ID_DOCKER --password-stdin
                         docker push ${ID_DOCKER}/${IMAGE_NAME}:${IMAGE_TAG}
                     '''
                 }
@@ -111,5 +113,12 @@ pipeline {
                 }
             }
         }
+    }
+    post {
+        always {
+            script {
+                slackNotifier(currentBuild.result)
+            }
+        }  
     }
 }
